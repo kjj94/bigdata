@@ -34,9 +34,9 @@ a, a:visited, a:active {
   margin-top: 10px;
 }
 
-.year {
-  font-size: 21px;
-  fill: #aaa;
+.labelsx {
+  font-size: 12px;
+  fill: back;
   cursor: default;
 }
 
