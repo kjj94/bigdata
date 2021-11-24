@@ -18,17 +18,35 @@ function bubbleChart() {
   // on which view mode is selected.
   var center = { x: width / 2, y: height / 2 };
 
-  var yearCenters = {
-    2008: { x: width / 3, y: height / 2 },
-    2009: { x: width / 2, y: height / 2 },
-    2010: { x: 2 * width / 3, y: height / 2 }
+  var no_mig_ext_Centers = {
+    0: { x: width / 3, y: height / 2 },
+    1: { x: 2 * width / 3, y: height / 2 }
   };
 
   // X locations of the year titles.
-  var yearsTitleX = {
-    2008: 160,
-    2009: width / 2,
-    2010: width - 160
+  var no_mig_ext_TitleX = {
+    "Without Migrant": width / 3,
+    "With Migrant": 2 * width / 3
+  };
+
+  var tipo_familia_Centers = {
+    1: { x: width / 2, y: height / 8 },
+    2: { x: width / 2, y: height * 2 / 8 },
+    3: { x: width / 2, y: height * 3 / 8 },
+    5: { x: width / 2, y: height * 4 / 8 },
+    8: { x: width / 2, y: height * 5 / 8 },
+    9: { x: width / 2, y: height * 6 / 8 },
+    10: { x: width / 2, y: height * 7 / 8 }
+  };
+
+  var tipo_familia_TitleY = {
+    "Biparent": height / 8,
+    "Single Parent: Mother": height * 2 / 8,
+    "Single Parent: Father": height * 3 / 8,
+    "Extensive": height * 4 / 8,
+    "Childless Union": height * 5 / 8,
+    "Only One Person": height * 6 / 8,
+    "Other": height * 7 / 8,
   };
 
   // @v4 strength to apply to the position forces
@@ -74,8 +92,8 @@ function bubbleChart() {
   // Nice looking colors - no reason to buck the trend
   // @v4 scales now have a flattened naming scheme
   var fillColor = d3.scaleOrdinal()
-    .domain(['low', 'medium', 'high'])
-    .range(['#d84b2a', '#beccae', '#7aa25c']);
+    .domain([ 0, 1])
+    .range(['#1A1B41', '#4392F1']);
 
 
   /*
@@ -93,13 +111,12 @@ function bubbleChart() {
   function createNodes(rawData) {
     // Use the max total_amount in the data as the max in the scale's domain
     // note we have to ensure the total_amount is a number.
-    var maxAmount = d3.max(rawData, function (d) { return +d.total_amount; });
+    var maxAmount = d3.max(rawData, function (d) { return+ d.hh_size; });
 
     // Sizes bubbles based on area.
     // @v4: new flattened scale names.
-    var radiusScale = d3.scalePow()
-      .exponent(0.5)
-      .range([2, 85])
+    var radiusScale = d3.scaleSqrt(2)
+      .range([0, 3.14])
       .domain([0, maxAmount]);
 
     // Use map() to convert raw data into node data.
@@ -107,14 +124,13 @@ function bubbleChart() {
     // working with data.
     var myNodes = rawData.map(function (d) {
       return {
-        id: d.id,
-        radius: radiusScale(+d.total_amount),
-        value: +d.total_amount,
-        name: d.grant_title,
-        org: d.organization,
-        group: d.group,
-        year: d.start_year,
-        x: Math.random() * 900,
+        id: d.rsp_id,
+        radius: radiusScale(+d.hh_size),
+        value: +d.hh_size,
+        tipo_familia: d.tipo_familia,
+        no_mig_ext: d.no_mig_ext,
+        education: d.escolaridad_max,
+        x: Math.random() * 800,
         y: Math.random() * 800
       };
     });
@@ -161,9 +177,8 @@ function bubbleChart() {
     var bubblesE = bubbles.enter().append('circle')
       .classed('bubble', true)
       .attr('r', 0)
-      .attr('fill', function (d) { return fillColor(d.group); })
-      .attr('stroke', function (d) { return d3.rgb(fillColor(d.group)).darker(); })
-      .attr('stroke-width', 2)
+      .attr('fill', function (d) { return fillColor(d.no_mig_ext); })
+      .attr('stroke-width', 1)
       .on('mouseover', showDetail)
       .on('mouseout', hideDetail);
 
@@ -201,8 +216,12 @@ function bubbleChart() {
    * Provides a x value for each node to be used with the split by year
    * x force.
    */
-  function nodeYearPos(d) {
-    return yearCenters[d.year].x;
+  function nodeNo_mig_extPos(d) {
+    return no_mig_ext_Centers[d.no_mig_ext].x;
+  }
+
+  function nodeTipo_familiaPos(d) {
+    return tipo_familia_Centers[d.tipo_familia].y;
   }
 
 
@@ -213,7 +232,7 @@ function bubbleChart() {
    * center of the visualization.
    */
   function groupBubbles() {
-    hideYearTitles();
+    hideTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
@@ -230,10 +249,20 @@ function bubbleChart() {
    * yearCenter of their data's year.
    */
   function splitBubbles() {
-    showYearTitles();
+    showTitles();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeYearPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
+
+    // @v4 We can reset the alpha value and restart the simulation
+    simulation.alpha(1).restart();
+  }
+
+  function splitBubbles2() {
+    showTitles2();
+
+    // @v4 Reset the 'x' force to draw the bubbles to their year centers
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeTipo_familiaPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -242,24 +271,37 @@ function bubbleChart() {
   /*
    * Hides Year title displays.
    */
-  function hideYearTitles() {
-    svg.selectAll('.year').remove();
+  function hideTitles() {
+    svg.selectAll('.no_mig_ext').remove();
   }
 
   /*
    * Shows Year title displays.
    */
-  function showYearTitles() {
+  function showTitles() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
-    var yearsData = d3.keys(yearsTitleX);
-    var years = svg.selectAll('.year')
-      .data(yearsData);
+    var no_mig_extData = d3.keys(no_mig_ext_TitleX);
+    var no_mig_ext = svg.selectAll('.no_mig_ext')
+      .data(no_mig_extData);
 
-    years.enter().append('text')
-      .attr('class', 'year')
-      .attr('x', function (d) { return yearsTitleX[d]; })
+    no_mig_ext.enter().append('text')
+      .attr('class', 'labelsx')
+      .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
       .attr('y', 40)
+      .attr('text-anchor', 'middle')
+      .text(function (d) { return d; });
+  }
+
+  function showTitles2() {
+    var tipo_familiaData = d3.keys(tipo_familia_TitleY);
+    var tipo_familia = svg.selectAll('.tipo_familia')
+      .data(tipo_familiaData);
+
+    tipo_familia.enter().append('text')
+      .attr('class', 'labelsx')
+      .attr('x', width/2)
+      .attr('y', function (d) { return tipo_familia_TitleY[d] + .5 * height / 8; })
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -273,14 +315,14 @@ function bubbleChart() {
     // change outline to indicate hover state.
     d3.select(this).attr('stroke', 'black');
 
-    var content = '<span class="name">Title: </span><span class="value">' +
-                  d.name +
+    var content = '<span class="name">Household Type: </span><span class="value">' +
+                  d.tipo_familia +
                   '</span><br/>' +
                   '<span class="name">Amount: </span><span class="value">$' +
                   addCommas(d.value) +
                   '</span><br/>' +
-                  '<span class="name">Year: </span><span class="value">' +
-                  d.year +
+                  '<span class="name">Household Size: </span><span class="value">' +
+                  d.value +
                   '</span>';
 
     tooltip.showTooltip(content, d3.event);
@@ -305,12 +347,15 @@ function bubbleChart() {
    * displayName is expected to be a string and either 'year' or 'all'.
    */
   chart.toggleDisplay = function (displayName) {
-    if (displayName === 'year') {
+    if (displayName === 'no_mig_ext') {
       splitBubbles();
-    } else {
-      groupBubbles();
+    }
+    else {
+      splitBubbles2();
     }
   };
+
+
 
 
   // return the chart function from closure.
@@ -378,7 +423,7 @@ function addCommas(nStr) {
 }
 
 // Load the data.
-d3.csv('data/gates_money.csv', display);
+d3.csv('https://kjj94.github.io/bigdata/data/household_data.csv', display);
 
 // setup the buttons.
 setupButtons();
