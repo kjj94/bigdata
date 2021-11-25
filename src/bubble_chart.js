@@ -8,8 +8,8 @@
  */
 function bubbleChart() {
   // Constants for sizing
-  var width = 940;
-  var height = 600;
+  var width = 1000;
+  var height = 1000;
 
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('gates_tooltip', 240);
@@ -47,6 +47,26 @@ function bubbleChart() {
     "Childless Union": height * 5 / 8,
     "Only One Person": height * 6 / 8,
     "Other": height * 7 / 8,
+  };
+
+  var education_Centers = {
+    1: { x: width / 2, y: height / 8 },
+    2: { x: width / 2, y: height * 2 / 8 },
+    4: { x: width / 2, y: height * 3 / 8 },
+    5: { x: width / 2, y: height * 4 / 8 },
+    8: { x: width / 2, y: height * 5 / 8 },
+    9: { x: width / 2, y: height * 6 / 8 },
+    99: { x: width / 2, y: height * 7 / 8 }
+  };
+
+  var education_TitleY = {
+    "Without Education": height / 8,
+    "Preschool-Primary": height * 2 / 8,
+    "Highschool": height * 3 / 8,
+    "Technical Training": height * 4 / 8,
+    "University Undegrad": height * 5 / 8,
+    "University Post Grad": height * 6 / 8,
+    "NS/NR": height * 7 / 8,
   };
 
   // @v4 strength to apply to the position forces
@@ -115,8 +135,9 @@ function bubbleChart() {
 
     // Sizes bubbles based on area.
     // @v4: new flattened scale names.
-    var radiusScale = d3.scaleSqrt(2)
-      .range([0, 3.14])
+    var radiusScale = d3.scalePow()
+      .exponent(1.5)
+      .range([0, 18])
       .domain([0, maxAmount]);
 
     // Use map() to convert raw data into node data.
@@ -137,7 +158,6 @@ function bubbleChart() {
 
     // sort them to prevent occlusion of smaller nodes.
     myNodes.sort(function (a, b) { return b.value - a.value; });
-
     return myNodes;
   }
 
@@ -178,7 +198,8 @@ function bubbleChart() {
       .classed('bubble', true)
       .attr('r', 0)
       .attr('fill', function (d) { return fillColor(d.no_mig_ext); })
-      .attr('stroke-width', 1)
+      .attr('stroke', "white")
+      .attr('stroke-width', .25)
       .on('mouseover', showDetail)
       .on('mouseout', hideDetail);
 
@@ -222,6 +243,10 @@ function bubbleChart() {
 
   function nodeTipo_familiaPos(d) {
     return tipo_familia_Centers[d.tipo_familia].y;
+  }
+
+  function nodeEducation_familiaPos(d) {
+    return education_Centers[d.education].y;
   }
 
 
@@ -268,11 +293,26 @@ function bubbleChart() {
     simulation.alpha(1).restart();
   }
 
+  function splitBubbles3() {
+    hideTitles2();
+    showTitles3();
+
+    // @v4 Reset the 'x' force to draw the bubbles to their year centers
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeEducation_familiaPos));
+
+    // @v4 We can reset the alpha value and restart the simulation
+    simulation.alpha(1).restart();
+  }
+
   /*
    * Hides Year title displays.
    */
   function hideTitles() {
     svg.selectAll('.no_mig_ext').remove();
+  }
+
+  function hideTitles2() {
+    svg.selectAll('.tipo_familia').remove();
   }
 
   /*
@@ -297,11 +337,22 @@ function bubbleChart() {
     var tipo_familiaData = d3.keys(tipo_familia_TitleY);
     var tipo_familia = svg.selectAll('.tipo_familia')
       .data(tipo_familiaData);
-
     tipo_familia.enter().append('text')
       .attr('class', 'labelsx')
       .attr('x', width/2)
       .attr('y', function (d) { return tipo_familia_TitleY[d] + .5 * height / 8; })
+      .attr('text-anchor', 'middle')
+      .text(function (d) { return d; });
+  }
+
+  function showTitles3() {
+    var educationData = d3.keys(education_TitleY);
+    var education = svg.selectAll('.education')
+      .data(educationData);
+    education.enter().append('text')
+      .attr('class', 'labelsx')
+      .attr('x', width/2)
+      .attr('y', function (d) { return education_TitleY[d] + .5 * height / 8; })
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -350,10 +401,17 @@ function bubbleChart() {
     if (displayName === 'no_mig_ext') {
       splitBubbles();
     }
-    else {
+    else if (displayName === 'tipo_familia') {
       splitBubbles2();
     }
+    else if (displayName === 'education') {
+      splitBubbles3();
+    }
+    else {
+      groupBubbles();
+    }
   };
+
 
 
 
@@ -423,7 +481,7 @@ function addCommas(nStr) {
 }
 
 // Load the data.
-d3.csv('https://kjj94.github.io/bigdata/data/household_data.csv', display);
+d3.csv('https://kjj94.github.io/bigdata/data/test8.csv', display);
 
 // setup the buttons.
 setupButtons();
