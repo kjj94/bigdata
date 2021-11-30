@@ -10,8 +10,8 @@ function bubbleChart() {
   // Constants for sizing
 
   var width = 600;
-  var height = 600;
-  var margin = {top: 100, bottom: 30, right: 30, left: 30};
+  var height = 800;
+  var margin = {top: 30, bottom: 30, right: 30, left: 30};
 
 
   // tooltip for mouseover functionality
@@ -358,8 +358,8 @@ function bubbleChart() {
     showTitles_tipo_familia();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeTipo_familiaPos));
-    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
+    simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeTipo_familiaPos));
+    simulation.force('x', d3.forceX().strength(forceStrength*2).x(nodeNo_mig_extPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -431,7 +431,7 @@ function bubbleChart() {
      country.enter().append('text')
        .attr('class', 'label_country')
        .attr('x', function (d) { return country_TitleX[d]; })
-       .attr('y', height - 10)
+       .attr('y', height - margin.bottom)
        .attr('text-anchor', 'middle')
        .text(function (d) { return d; });
 
@@ -447,7 +447,7 @@ function bubbleChart() {
     no_mig_ext.enter().append('text')
       .attr('class', 'label_no_mig_ext')
       .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
-      .attr('y', height - 10)
+      .attr('y', height - margin.bottom)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -458,7 +458,7 @@ function bubbleChart() {
       .data(tipo_familiaData);
     tipo_familia.enter().append('text')
       .attr('class', 'label_tipo_familia')
-      .attr('x', 30)
+      .attr('x', margin.left)
       .attr('y', function (d) { return tipo_familia_TitleY[d] + .5 * height / 8; })
       .attr('text-anchor', 'left')
       .text(function (d) { return d; });
@@ -470,7 +470,7 @@ function bubbleChart() {
       .data(educationData);
     education.enter().append('text')
       .attr('class', 'label_education')
-      .attr('x', 30 )
+      .attr('x', margin.left)
       .attr('y', function (d) { return education_TitleY[d] + .5 * height / 8; })
       .attr('text-anchor', 'left')
       .text(function (d) { return d; });
@@ -482,7 +482,7 @@ function bubbleChart() {
       .data(incomeData);
     income.enter().append('text')
       .attr('class', 'label_income')
-      .attr('x', 30)
+      .attr('x', margin.left)
       .attr('y', function (d) { return income_TitleY[d] + .5 * height / 8; })
       .attr('text-anchor', 'left')
       .text(function (d) { return d; });
