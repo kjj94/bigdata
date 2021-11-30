@@ -44,47 +44,62 @@ function bubbleChart() {
     "With Migrant": 2 * width / 3
   };
 
-
-
-
   var tipo_familia_Centers = {
-    1: { x: width / 2, y: (height-margin.top*2)*1/9 +margin.top},
-    2: { x: width / 2, y: (height-margin.top*2)*2/9 +margin.top},
-    3: { x: width / 2, y: (height-margin.top*2)*3/9 +margin.top},
-    5: { x: width / 2, y: (height-margin.top*2)*4/9 +margin.top},
-    8: { x: width / 2, y: (height-margin.top*2)*5/9 +margin.top},
-    9: { x: width / 2, y: (height-margin.top*2)*6/9 +margin.top},
-    10: { x: width / 2, y: (height-margin.top*2)*7/9 +margin.top}
+    1: { x: width / 2, y: (height-margin.top)*1/8},
+    2: { x: width / 2, y: (height-margin.top)*2/8},
+    3: { x: width / 2, y: (height-margin.top)*3/8},
+    5: { x: width / 2, y: (height-margin.top)*4/8},
+    8: { x: width / 2, y: (height-margin.top)*5/8},
+    9: { x: width / 2, y: (height-margin.top)*6/8},
+    10: { x: width / 2, y: (height-margin.top)*7/8}
   };
 
   var tipo_familia_TitleY = {
-    "Biparent": (height-margin.top*2)*1/8 +margin.top,
-    "Single Parent: Mother": (height-margin.top*2)*2/8 +margin.top,
-    "Single Parent: Father": (height-margin.top*2)*3/8 +margin.top,
-    "Extensive": (height-margin.top*2)*4/8 +margin.top,
-    "Childless Union": (height-margin.top*2)*5/8 +margin.top,
-    "Only One Person": (height-margin.top*2)*6/8 +margin.top,
-    "Other": (height-margin.top*2)*7/8 +margin.top,
+    "Biparent": (height-margin.top)*1/8,
+    "Single Parent: Mother": (height-margin.top)*2/8,
+    "Single Parent: Father": (height-margin.top)*3/8,
+    "Extensive": (height-margin.top)*4/8,
+    "Childless Union": (height-margin.top)*5/8,
+    "Only One Person": (height-margin.top)*6/8,
+    "Other": (height-margin.top)*7/8,
   };
 
   var education_Centers = {
-    1: { x: width / 2, y: height / 8 + margin.top},
-    2: { x: width / 2, y: height * 2 / 8 + margin.top},
-    4: { x: width / 2, y: height * 3 / 8 + margin.top},
-    5: { x: width / 2, y: height * 4 / 8 + margin.top},
-    8: { x: width / 2, y: height * 5 / 8 + margin.top},
-    9: { x: width / 2, y: height * 6 / 8 + margin.top},
-    99: { x: width / 2, y: height * 7 / 8 + margin.top}
+    1: { x: width / 2, y: (height-margin.top*2)*1/9 },
+    2: { x: width / 2, y: (height-margin.top*2)*2/9 },
+    4: { x: width / 2, y: (height-margin.top*2)*3/9 },
+    5: { x: width / 2, y: (height-margin.top*2)*4/9 },
+    8: { x: width / 2, y: (height-margin.top*2)*5/9 },
+    9: { x: width / 2, y: (height-margin.top*2)*6/9 },
+    99: { x: width / 2, y: (height-margin.top*2)*7/9 }
   };
 
   var education_TitleY = {
-    "Without Education": height / 8,
-    "Preschool-Primary": height * 2 / 8,
-    "Highschool": height * 3 / 8,
-    "Technical Training": height * 4 / 8,
-    "University Undegrad": height * 5 / 8,
-    "University Post Grad": height * 6 / 8,
-    "NS/NR": height * 7 / 8,
+    "Without Education": (height-margin.top*2)*1/9,
+    "Preschool-Primary": (height-margin.top*2)*2/9,
+    "Highschool": (height-margin.top*2)*3/9,
+    "Technical Training": (height-margin.top*2)*4/9,
+    "University Undegrad": (height-margin.top*2)*5/9,
+    "University Post Grad": (height-margin.top*2)*6/9,
+    "NS/NR": (height-margin.top*2)*7/9,
+  };
+
+  var income_Centers = {
+    1: { x: width / 2, y: (height-margin.top*2) / 8 + margin.top},
+    2: { x: width / 2, y: (height-margin.top*2) * 2 / 8 + margin.top},
+    3: { x: width / 2, y: (height-margin.top*2) * 3 / 8 + margin.top},
+    4: { x: width / 2, y: (height-margin.top*2) * 4 / 8 + margin.top},
+    5: { x: width / 2, y: (height-margin.top*2) * 5 / 8 + margin.top},
+    99: { x: width / 2, y: (height-margin.top*2) * 6 / 8 + margin.top},
+  };
+
+  var income_TitleY = {
+    "Enough": (height-margin.top*2) / 8 + margin.top,
+    "Almost Enough": (height-margin.top*2) * 2 / 8 + margin.top,
+    "Sometimes Enough": (height-margin.top*2) * 3 / 8 + margin.top,
+    "Rarely Enough": (height-margin.top*2) * 4 / 8 + margin.top,
+    "Insufficient": (height-margin.top*2) * 5 / 8 + margin.top,
+    "NS/NR": (height-margin.top*2) * 6 / 8 + margin.top,
   };
 
   // @v4 strength to apply to the position forces
@@ -175,6 +190,7 @@ function bubbleChart() {
         no_mig_ext: d.no_mig_ext,
         education: d.escolaridad_max,
         country: d.country,
+        income: d.income_sufficiency_6m,
         x: Math.random() * 800,
         y: Math.random() * 800
       };
@@ -277,6 +293,10 @@ function bubbleChart() {
     return education_Centers[d.education].y;
   }
 
+  function nodeIncomePos(d) {
+    return income_Centers[d.income].y;
+  }
+
 
   /*
    * Sets visualization in "single group mode".
@@ -348,10 +368,25 @@ function bubbleChart() {
   function splitBubbles_education() {
     hideTitles_country();
     hideTitles_tipo_familia();
+    hideTitles_income();
     showTitles_education();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength).y(nodeEducationPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
+
+    // @v4 We can reset the alpha value and restart the simulation
+    simulation.alpha(1).restart();
+  }
+
+  function splitBubbles_income() {
+    hideTitles_country();
+    hideTitles_tipo_familia();
+    hideTitles_education();
+    showTitles_income();
+
+    // @v4 Reset the 'x' force to draw the bubbles to their year centers
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeIncomePos));
     simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
 
     // @v4 We can reset the alpha value and restart the simulation
@@ -377,6 +412,10 @@ function bubbleChart() {
     svg.selectAll('.label_education').remove();
   }
 
+  function hideTitles_income() {
+    svg.selectAll('.label_income').remove();
+  }
+
   /*
    * Shows Year title displays.
    */
@@ -392,7 +431,7 @@ function bubbleChart() {
      country.enter().append('text')
        .attr('class', 'label_country')
        .attr('x', function (d) { return country_TitleX[d]; })
-       .attr('y', height - 40)
+       .attr('y', height - 10)
        .attr('text-anchor', 'middle')
        .text(function (d) { return d; });
 
@@ -408,7 +447,7 @@ function bubbleChart() {
     no_mig_ext.enter().append('text')
       .attr('class', 'label_no_mig_ext')
       .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
-      .attr('y', height - 40)
+      .attr('y', height - 10)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -419,9 +458,9 @@ function bubbleChart() {
       .data(tipo_familiaData);
     tipo_familia.enter().append('text')
       .attr('class', 'label_tipo_familia')
-      .attr('x', width/2)
+      .attr('x', 30)
       .attr('y', function (d) { return tipo_familia_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'middle')
+      .attr('text-anchor', 'left')
       .text(function (d) { return d; });
   }
 
@@ -431,9 +470,21 @@ function bubbleChart() {
       .data(educationData);
     education.enter().append('text')
       .attr('class', 'label_education')
-      .attr('x', width/2)
+      .attr('x', 30 )
       .attr('y', function (d) { return education_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'middle')
+      .attr('text-anchor', 'left')
+      .text(function (d) { return d; });
+  }
+
+  function showTitles_income() {
+    var incomeData = d3.keys(income_TitleY);
+    var income = svg.selectAll('.education')
+      .data(incomeData);
+    income.enter().append('text')
+      .attr('class', 'label_income')
+      .attr('x', 30)
+      .attr('y', function (d) { return income_TitleY[d] + .5 * height / 8; })
+      .attr('text-anchor', 'left')
       .text(function (d) { return d; });
   }
 
@@ -490,6 +541,9 @@ function bubbleChart() {
     else if (displayName === 'education') {
       splitBubbles_education();
     }
+    else if (displayName === 'income') {
+      splitBubbles_income();
+    }
     else {
       groupBubbles();
     }
@@ -500,7 +554,8 @@ function bubbleChart() {
       splitBubbles_country,
       splitBubbles_no_mig_ext,
       splitBubbles_tipo_familia,
-      splitBubbles_education
+      splitBubbles_education,
+      splitBubbles_income
   ]
 
   //All the scrolling function
