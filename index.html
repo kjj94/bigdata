@@ -11,34 +11,41 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/bubble_chart.css">
 </head>
+
 <body>
-<div class="container position-relative">
-<div class="row">
+<div id="header">
   <div class="col-12">
-    <div class="headerbox">
+    <div class="headerfixedbackground">
     <div class="headertext">
     <h1> Splitting and Fragmenting</h1>
     <h2>The Implications of Migration on Households as a Collective Unit</h1>
     </div>
     </div>
   </div>
+  <div id="toolbar">
+    <a href="#" id="all" class="button active">Household Overview</a>
+    <a href="#" id="country" class="button">Country</a>
+    <a href="#" id="no_mig_ext" class="button">External Migration</a>
+    <a href="#" id="tipo_familia" class="button">Family Type</a>
+    <a href="#" id="education" class="button">Education</a>
+    <a href="#" id="income" class="button">Income</a>
+  </div>
 </div>
 </div>
 <div class="container position-relative">
 
-    <div id="toolbar">
-      <a href="#" id="all" class="button active">Household Overview</a>
-      <a href="#" id="country" class="button">Country</a>
-      <a href="#" id="no_mig_ext" class="button">External Migration</a>
-      <a href="#" id="tipo_familia" class="button">Family Type</a>
-      <a href="#" id="education" class="button">Education</a>
-      <a href="#" id="income" class="button">Income</a>
-    </div>
     <div class="row">
       <div class= "col-7 position-relative">
         <div id="vis" class="position-fixed"></div>
       </div>
       <div class= "col-5">
+        <h2 id="text0" class ="maintext">_01 Household Overview</h1>
+        <p id="text0-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
+        </p>
+        <p id="text0-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
+
+        <p id="text10-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+        </div>
         <div class= "step">
         <h2 id=text1-0 class ="maintext">_01 Household Overview</h1>
         <p id="text1-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
@@ -111,27 +118,6 @@
 </body>
 
 <script type="text/javascript">
-
-const controller = new ScrollMagic.Controller();
-
-const country = new ScrollMagic.Scene({
-                            triggerElement:"#text3-0"
-
-                          })
-                          .on("enter", (e) => splitBubbles3();
-
-                          })
-                          .addIndicators({name:"forceLink"})
-                          .addTo(controller);
-
-
-
-const scrollFromAllDotsToForceX = new ScrollMagic.Scene({triggerElement:"#text2-0"})
-                          .on("enter",splitBubbles2()
-                          })
-                          .addIndicators({name:"forceX"})
-                          .addTo(controller);
-                        }
 
 
 
