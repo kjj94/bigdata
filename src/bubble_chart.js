@@ -8,14 +8,30 @@
  */
 function bubbleChart() {
   // Constants for sizing
-  var width = 1000;
-  var height = 1000;
+
+  var width = 600;
+  var height = 600;
+  var margin = {top: 100, bottom: 30, right: 30, left: 30};
+
 
   // tooltip for mouseover functionality
   var tooltip = floatingTooltip('gates_tooltip', 240);
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
+
+  var country_Centers = {
+    "SLV": { x: width / 4, y: height / 2},
+    "GT": { x: width / 2, y: height / 2},
+    "HND": { x: (width * 3) / 4, y: height / 2},
+  };
+
+  var country_TitleX = {
+    "El Salvador":  width / 4,
+    "Guatemala": width / 2,
+    "Honduras": (width * 3) / 4,
+  };
+
   var center = { x: width / 2, y: height / 2 };
 
   var no_mig_ext_Centers = {
@@ -23,40 +39,42 @@ function bubbleChart() {
     1: { x: 2 * width / 3, y: height / 2 }
   };
 
-  // X locations of the year titles.
   var no_mig_ext_TitleX = {
     "Without Migrant": width / 3,
     "With Migrant": 2 * width / 3
   };
 
+
+
+
   var tipo_familia_Centers = {
-    1: { x: width / 2, y: height / 8 },
-    2: { x: width / 2, y: height * 2 / 8 },
-    3: { x: width / 2, y: height * 3 / 8 },
-    5: { x: width / 2, y: height * 4 / 8 },
-    8: { x: width / 2, y: height * 5 / 8 },
-    9: { x: width / 2, y: height * 6 / 8 },
-    10: { x: width / 2, y: height * 7 / 8 }
+    1: { x: width / 2, y: (height-margin.top*2)*1/9 +margin.top},
+    2: { x: width / 2, y: (height-margin.top*2)*2/9 +margin.top},
+    3: { x: width / 2, y: (height-margin.top*2)*3/9 +margin.top},
+    5: { x: width / 2, y: (height-margin.top*2)*4/9 +margin.top},
+    8: { x: width / 2, y: (height-margin.top*2)*5/9 +margin.top},
+    9: { x: width / 2, y: (height-margin.top*2)*6/9 +margin.top},
+    10: { x: width / 2, y: (height-margin.top*2)*7/9 +margin.top}
   };
 
   var tipo_familia_TitleY = {
-    "Biparent": height / 8,
-    "Single Parent: Mother": height * 2 / 8,
-    "Single Parent: Father": height * 3 / 8,
-    "Extensive": height * 4 / 8,
-    "Childless Union": height * 5 / 8,
-    "Only One Person": height * 6 / 8,
-    "Other": height * 7 / 8,
+    "Biparent": (height-margin.top*2)*1/8 +margin.top,
+    "Single Parent: Mother": (height-margin.top*2)*2/8 +margin.top,
+    "Single Parent: Father": (height-margin.top*2)*3/8 +margin.top,
+    "Extensive": (height-margin.top*2)*4/8 +margin.top,
+    "Childless Union": (height-margin.top*2)*5/8 +margin.top,
+    "Only One Person": (height-margin.top*2)*6/8 +margin.top,
+    "Other": (height-margin.top*2)*7/8 +margin.top,
   };
 
   var education_Centers = {
-    1: { x: width / 2, y: height / 8 },
-    2: { x: width / 2, y: height * 2 / 8 },
-    4: { x: width / 2, y: height * 3 / 8 },
-    5: { x: width / 2, y: height * 4 / 8 },
-    8: { x: width / 2, y: height * 5 / 8 },
-    9: { x: width / 2, y: height * 6 / 8 },
-    99: { x: width / 2, y: height * 7 / 8 }
+    1: { x: width / 2, y: height / 8 + margin.top},
+    2: { x: width / 2, y: height * 2 / 8 + margin.top},
+    4: { x: width / 2, y: height * 3 / 8 + margin.top},
+    5: { x: width / 2, y: height * 4 / 8 + margin.top},
+    8: { x: width / 2, y: height * 5 / 8 + margin.top},
+    9: { x: width / 2, y: height * 6 / 8 + margin.top},
+    99: { x: width / 2, y: height * 7 / 8 + margin.top}
   };
 
   var education_TitleY = {
@@ -103,6 +121,7 @@ function bubbleChart() {
     .force('x', d3.forceX().strength(forceStrength).x(center.x))
     .force('y', d3.forceY().strength(forceStrength).y(center.y))
     .force('charge', d3.forceManyBody().strength(charge))
+    .force('collision', d3.forceCollide().radius(d => d.radius))
     .on('tick', ticked);
 
   // @v4 Force starts up automatically,
@@ -114,6 +133,10 @@ function bubbleChart() {
   var fillColor = d3.scaleOrdinal()
     .domain([ 0, 1])
     .range(['#1A1B41', '#4392F1']);
+
+    var countrycolor = d3.scaleOrdinal()
+      .domain([ "SLV", "GT", "HND"])
+      .range(['#BAFF29', '#16DB93', '#FF784F']);
 
 
   /*
@@ -137,7 +160,7 @@ function bubbleChart() {
     // @v4: new flattened scale names.
     var radiusScale = d3.scalePow()
       .exponent(1.5)
-      .range([0, 18])
+      .range([0, 10])
       .domain([0, maxAmount]);
 
     // Use map() to convert raw data into node data.
@@ -151,6 +174,7 @@ function bubbleChart() {
         tipo_familia: d.tipo_familia,
         no_mig_ext: d.no_mig_ext,
         education: d.escolaridad_max,
+        country: d.country,
         x: Math.random() * 800,
         y: Math.random() * 800
       };
@@ -180,10 +204,9 @@ function bubbleChart() {
 
     // Create a SVG element inside the provided selector
     // with desired size.
-    svg = d3.select(selector)
+    svg = d3.select('#vis')
       .append('svg')
-      .attr('width', width)
-      .attr('height', height);
+      .attr("viewBox", "0 0 600 600");
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
@@ -199,7 +222,7 @@ function bubbleChart() {
       .attr('r', 0)
       .attr('fill', function (d) { return fillColor(d.no_mig_ext); })
       .attr('stroke', "white")
-      .attr('stroke-width', .25)
+      .attr('stroke-width', 0.25)
       .on('mouseover', showDetail)
       .on('mouseout', hideDetail);
 
@@ -209,7 +232,7 @@ function bubbleChart() {
     // Fancy transition to make bubbles appear, ending with the
     // correct radius
     bubbles.transition()
-      .duration(2000)
+      .duration(1000)
       .attr('r', function (d) { return d.radius; });
 
     // Set the simulation's nodes to our newly created nodes array.
@@ -237,6 +260,11 @@ function bubbleChart() {
    * Provides a x value for each node to be used with the split by year
    * x force.
    */
+
+  function countryPos(d) {
+    return country_Centers[d.country].x;
+  }
+
   function nodeNo_mig_extPos(d) {
     return no_mig_ext_Centers[d.no_mig_ext].x;
   }
@@ -245,7 +273,7 @@ function bubbleChart() {
     return tipo_familia_Centers[d.tipo_familia].y;
   }
 
-  function nodeEducation_familiaPos(d) {
+  function nodeEducationPos(d) {
     return education_Centers[d.education].y;
   }
 
@@ -257,10 +285,14 @@ function bubbleChart() {
    * center of the visualization.
    */
   function groupBubbles() {
-    hideTitles();
+    hideTitles_country();
+    hideTitles_no_mig_ext();
+    hideTitles_tipo_familia();
+    hideTitles_education();
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
+    simulation.force('y', d3.forceY().strength(forceStrength).y(center.y));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -273,8 +305,25 @@ function bubbleChart() {
    * tick function is set to move nodes to the
    * yearCenter of their data's year.
    */
-  function splitBubbles() {
-    showTitles();
+
+   function splitBubbles_country() {
+     hideTitles_no_mig_ext();
+     hideTitles_tipo_familia();
+     hideTitles_education();
+     showTitles_country();
+
+     // @v4 Reset the 'x' force to draw the bubbles to their year centers
+     simulation.force('x', d3.forceX().strength(forceStrength).x(countryPos));
+
+     // @v4 We can reset the alpha value and restart the simulation
+     simulation.alpha(1).restart();
+   }
+
+  function splitBubbles_no_mig_ext() {
+    hideTitles_country();
+    hideTitles_tipo_familia();
+    hideTitles_education();
+    showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
@@ -283,22 +332,27 @@ function bubbleChart() {
     simulation.alpha(1).restart();
   }
 
-  function splitBubbles2() {
-    showTitles2();
+  function splitBubbles_tipo_familia() {
+    hideTitles_country();
+    hideTitles_education();
+    showTitles_tipo_familia();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength).y(nodeTipo_familiaPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
   }
 
-  function splitBubbles3() {
-    hideTitles2();
-    showTitles3();
+  function splitBubbles_education() {
+    hideTitles_country();
+    hideTitles_tipo_familia();
+    showTitles_education();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeEducation_familiaPos));
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeEducationPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -307,18 +361,44 @@ function bubbleChart() {
   /*
    * Hides Year title displays.
    */
-  function hideTitles() {
-    svg.selectAll('.no_mig_ext').remove();
+  function hideTitles_no_mig_ext() {
+    svg.selectAll('.label_no_mig_ext').remove();
   }
 
-  function hideTitles2() {
-    svg.selectAll('.tipo_familia').remove();
+  function hideTitles_country() {
+    svg.selectAll('.label_country').remove();
+  }
+
+  function hideTitles_tipo_familia() {
+    svg.selectAll('.label_tipo_familia').remove();
+  }
+
+  function hideTitles_education() {
+    svg.selectAll('.label_education').remove();
   }
 
   /*
    * Shows Year title displays.
    */
-  function showTitles() {
+
+
+   function showTitles_country() {
+     // Another way to do this would be to create
+     // the year texts once and then just hide them.
+     var country_Data = d3.keys(country_TitleX);
+     var country = svg.selectAll('.country')
+       .data(country_Data);
+
+     country.enter().append('text')
+       .attr('class', 'label_country')
+       .attr('x', function (d) { return country_TitleX[d]; })
+       .attr('y', height - 40)
+       .attr('text-anchor', 'middle')
+       .text(function (d) { return d; });
+
+  }
+
+  function showTitles_no_mig_ext() {
     // Another way to do this would be to create
     // the year texts once and then just hide them.
     var no_mig_extData = d3.keys(no_mig_ext_TitleX);
@@ -326,31 +406,31 @@ function bubbleChart() {
       .data(no_mig_extData);
 
     no_mig_ext.enter().append('text')
-      .attr('class', 'labelsx')
+      .attr('class', 'label_no_mig_ext')
       .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
-      .attr('y', 40)
+      .attr('y', height - 40)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
 
-  function showTitles2() {
+  function showTitles_tipo_familia() {
     var tipo_familiaData = d3.keys(tipo_familia_TitleY);
     var tipo_familia = svg.selectAll('.tipo_familia')
       .data(tipo_familiaData);
     tipo_familia.enter().append('text')
-      .attr('class', 'labelsx')
+      .attr('class', 'label_tipo_familia')
       .attr('x', width/2)
       .attr('y', function (d) { return tipo_familia_TitleY[d] + .5 * height / 8; })
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
 
-  function showTitles3() {
+  function showTitles_education() {
     var educationData = d3.keys(education_TitleY);
     var education = svg.selectAll('.education')
       .data(educationData);
     education.enter().append('text')
-      .attr('class', 'labelsx')
+      .attr('class', 'label_education')
       .attr('x', width/2)
       .attr('y', function (d) { return education_TitleY[d] + .5 * height / 8; })
       .attr('text-anchor', 'middle')
@@ -366,14 +446,14 @@ function bubbleChart() {
     // change outline to indicate hover state.
     d3.select(this).attr('stroke', 'black');
 
-    var content = '<span class="name">Household Type: </span><span class="value">' +
-                  d.tipo_familia +
+    var content = '<span class="name">Country: </span><span class="value">' +
+                  d.country +
                   '</span><br/>' +
-                  '<span class="name">Amount: </span><span class="value">$' +
+                  '<span class="name">Household size: </span><span class="value">' +
                   addCommas(d.value) +
                   '</span><br/>' +
-                  '<span class="name">Household Size: </span><span class="value">' +
-                  d.value +
+                  '<span class="name">Household type: </span><span class="value">' +
+                  d.tipo_familia +
                   '</span>';
 
     tooltip.showTooltip(content, d3.event);
@@ -385,7 +465,7 @@ function bubbleChart() {
   function hideDetail(d) {
     // reset outline
     d3.select(this)
-      .attr('stroke', d3.rgb(fillColor(d.group)).darker());
+      .attr('stroke', "white");
 
     tooltip.hideTooltip();
   }
@@ -398,19 +478,62 @@ function bubbleChart() {
    * displayName is expected to be a string and either 'year' or 'all'.
    */
   chart.toggleDisplay = function (displayName) {
-    if (displayName === 'no_mig_ext') {
-      splitBubbles();
+    if (displayName === 'country') {
+      splitBubbles_country();
+    }
+    else if (displayName === 'no_mig_ext') {
+      splitBubbles_no_mig_ext();
     }
     else if (displayName === 'tipo_familia') {
-      splitBubbles2();
+      splitBubbles_tipo_familia();
     }
     else if (displayName === 'education') {
-      splitBubbles3();
+      splitBubbles_education();
     }
     else {
       groupBubbles();
     }
   };
+
+  let activationFunctions = [
+      groupBubbles,
+      splitBubbles_country,
+      splitBubbles_no_mig_ext,
+      splitBubbles_tipo_familia,
+      splitBubbles_education
+  ]
+
+  //All the scrolling function
+  //Will draw a new graph based on the index provided by the scroll
+
+
+  let scroll = scroller()
+      .container(d3.select('#vis'))
+  scroll()
+
+  let lastIndex, activeIndex = 0
+
+  scroll.on('active', function(index){
+      d3.selectAll('.step')
+          .transition().duration(500)
+          .style('opacity', function (d, i) {return i === index ? 1 : 0.1;});
+
+      activeIndex = index
+      let sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
+      let scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
+      scrolledSections.forEach(i => {
+          activationFunctions[i]();
+      })
+      lastIndex = activeIndex;
+
+  })
+
+  scroll.on('progress', function(index, progress){
+      if (index == 2 & progress > 0.7){
+
+      }
+  })
+
 
 
 
@@ -479,6 +602,10 @@ function addCommas(nStr) {
 
   return x1 + x2;
 }
+
+
+
+
 
 // Load the data.
 d3.csv('https://kjj94.github.io/bigdata/data/test8.csv', display);
