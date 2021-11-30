@@ -222,7 +222,7 @@ function bubbleChart() {
     // with desired size.
     svg = d3.select('#vis')
       .append('svg')
-      .attr("viewBox", "0 0 600 600");
+      .attr("viewBox", "0 0 1000 1000");
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
@@ -372,8 +372,8 @@ function bubbleChart() {
     showTitles_education();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeEducationPos));
-    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
+    simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeEducationPos));
+    simulation.force('x', d3.forceX().strength(forceStrength*2).x(nodeNo_mig_extPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
