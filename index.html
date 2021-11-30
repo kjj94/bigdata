@@ -13,49 +13,40 @@
 </head>
 
 <body>
-<div id="header">
-  <div class="col-12">
-    <div class="headerfixedbackground">
-    <div class="headertext">
-    <h1> Splitting and Fragmenting</h1>
-    <h2>The Implications of Migration on Households as a Collective Unit</h1>
+
+<div class="container">
+  <div style="height: 150px; background-color: rgba(255,0,0)">
+    <div class="headertext" style="height: 150px; width: 100%; background-color: rgba(255,255,255); position: fixed; z-index: 10">
+        <h1>Splitting and Fragmenting</h1>
+        <h2>The Implications of Migration on Households as a Collective Unit</h1>
+      <div id="toolbar">
+        <a href="#" id="all" class="button active">Household Overview</a>
+        <a href="#" id="country" class="button">Country</a>
+        <a href="#" id="no_mig_ext" class="button">External Migration</a>
+        <a href="#" id="tipo_familia" class="button">Family Type</a>
+        <a href="#" id="education" class="button">Education</a>
+        <a href="#" id="income" class="button">Income</a>
+      </div>
     </div>
-    </div>
-  </div>
-  <div id="toolbar">
-    <a href="#" id="all" class="button active">Household Overview</a>
-    <a href="#" id="country" class="button">Country</a>
-    <a href="#" id="no_mig_ext" class="button">External Migration</a>
-    <a href="#" id="tipo_familia" class="button">Family Type</a>
-    <a href="#" id="education" class="button">Education</a>
-    <a href="#" id="income" class="button">Income</a>
   </div>
 </div>
 
-<div class="container position-relative">
 
-    <div class="row">
+<div class="container">
+  <div class="row">
       <div class= "col-7 position-relative">
         <div id="vis" class="position-fixed"></div>
       </div>
 
       <div class= "col-5">
-        <div>
-          <h2 id="text0" class ="maintext">_01 Household Overview</h2>
-          <p id="text0-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-          </p>
-          <p id="text0-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-          </p>
-          <p id="text10-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-          </p>
-        </div>
+
         <div class= "step">
-        <h2 id=text1-0 class ="maintext">_01 Household Overview</h2>
-        <p id="text1-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-        </p>
-        <p id="text1-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-         </p>
-        <p id="text1-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+          <h2 id=text1-0 class ="maintext">_01 Household Overview</h2>
+          <p id="text1-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
+          </p>
+          <div class="maintext">
+          <iframe class="iframe" id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://kjj94.github.io/bigdatatest/events_yr_fig.html" height="400" width="100%"></iframe>
+          </div>
         </div>
 
         <div class= "step">
@@ -63,48 +54,52 @@
           <p id="text1-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
           </p>
           <p id="text2-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-           </p>
+          </p>
           <p id="text2-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
           </div>
 
-          <div class= "step">
-            <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-            <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-            </p>
-            <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-             </p>
-            <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-                </div>
+        <div class= "step">
+          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
+          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
+          </p>
+          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
+          </p>
+          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+          </p>
+        </div>
 
-                <div class= "step">
-                  <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-                  <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-                  </p>
-                  <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-                   </p>
-                  <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-                      </div>
+        <div class= "step">
+          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
+          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
+          </p>
+          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
+          </p>
+          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+          </p>
+        </div>
 
-                      <div class= "step">
-                        <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-                        <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-                        </p>
-                        <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-                         </p>
-                        <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-                            </div>
+        <div class= "step">
+          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
+          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
+          </p>
+          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
+          </p>
+          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+          </p>
+        </div>
 
-                            <div class= "step">
-                              <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-                              <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-                              </p>
-                              <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-                               </p>
-                              <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-                                  </div>
-      </div>
+        <div class= "step">
+          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
+          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
+          </p>
+          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
+          </p>
+          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+        </div>
       </div>
     </div>
+</div>
+
 
     <div class="footer">
       <p>11.154/11.454 Big Data, Visualization, and Society - Central American Migration </p>
