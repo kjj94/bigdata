@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/bubble_chart.css">
+  <link rel="stylesheet" href="css/new.css">
 </head>
 
 <body>
@@ -39,63 +40,98 @@
       </div>
 
       <div class= "col-5">
-
         <div class= "step">
-          <h2 id=text1-0 class ="maintext">_01 Household Overview</h2>
-          <p id="text1-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-          </p>
+          <h2 id=text1-0 class ="maintext"> 00 Introduction</h2>
+          <p id="text1-a" class="maintext"> In 2019, <span class="highlight"> the World Food Programme (WFP) collected data about households in the Northern Triangle </span>, across El Salvador, Guatemala, and Honduras. While migration may be perceived as an individual endeavor,the reality is of course that migration is often vital for survival of entire families. <span class="highlight"> Migration affects entire households.</span> It affects <span class="highlight">elderly such as Pedro and Marta</span> who rely on remittances from their children, <span class="highlight">single-mothers such as Maria</span> who survive off of her brother’s work at Mcdonald’s, and the ability for adults such as <span class="highlight">Juan who lives in an 18-person household</span> to complete their education. So, how exactly is the household as a whole affected by migration?
+  </p>
+<p class= "maintext"> Our main questions were: <br> - What is the link between <span class="highlight"> migration and household size</span>?
+<br> - How does it affect <span class="highlight"> education</span> within families?
+<br> - How does migration affect <span class="highlight"> income sufficiency </span>?
+</span></p>
+
           <div class="maintext">
-          <iframe class="iframe" id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://kjj94.github.io/bigdatatest/events_yr_fig.html" height="400" width="100%"></iframe>
+              <img class="img" src="https://pulitzercenter.org/sites/default/files/styles/orig_optimized/public/07-23-20/web-pp-02-mkohut_climate_migrants-final-print-002.jpg?itok=iswOZRCo" height="300" width="100%">
+              <p> Image from the NYT The Great Climate Migration, 2020 </p>
           </div>
         </div>
 
         <div class= "step">
-          <h2 id=text2-0 class ="maintext">_01 Household Overview</h2>
-          <p id="text1-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
+          <h2 id=text2-0 class ="maintext"> 01 Household Overview</h2>
+          <p id="text1-a" class="maintext"> Our analysis uses data from the WFP survey, with <span class="highlight">each bubble representing one household </span> in the Northern Triangle, the <span class="highlight">size of the bubble correlating to household size</span> (1-18 people.) Here, we have visualized <span class="highlight">almost 5,000 households </span>, encompassing <span class="highlight">over 20,000 individuals </span>.
+  </p>
+          <p id="text2-b" class="maintext"> These visualisations all represent real people with different stories:<br>
+             - <span class="highlight"> Pedro</span>, a 62-year old man living in San Rafael Pie de la Cuesta, Guatemala, is able to sustain his life with his wife, from <span class="highlight">money that their kids send</span> on a monthly basis. <br>
+            - <span class="highlight"> Maria </span>, a 21-year old single mother living in San Francisco Javier, El Salvador, receives her main source of income from a <span class="highlight">brother who works at Mcdonald’s</span> in a neighboring city.
+</p>
+         </div>
+
+        <div class= "step">
+          <h2 id=text3-0 class ="maintext"> 02 Country </h2>
+          <p id="text3-a" class="maintext"> Households are located all across the Northern Triangle. In relation to our data, <span class="highlight">34.6% live in Guatemala</span>, <span class="highlight">31.4% live in Honduras</span>, and <span class="highlight">34% live in El Salvador</span>. Within these countries, households are located across urban and rural areas, with 68% living in rural areas and 32% living in urban areas.   </p>
+        </div>
+        <div class="maintext">
+            <img class="img" src="https://kjj94.github.io/bigdata/map.jpg" height="300" width="100%">
+            <p> Map of the Northern Triangle </p>
+        </div>
+
+        <div class= "step">
+          <h2 id=text3-0 class ="maintext"> 03 External Migration</h2>
+          <p id="text3-a" class="maintext"> Migration in our dataset is certainly an anomaly, not the norm. Here, we can see that <span class="highlight">over 76 percent of households do not have any migrants</span> in their family in the last five years. In contrast, only <span class="highlight">24 percent of households have at least one family member that has migrated externally</span> in the last five years. External migration remains the minority.
           </p>
-          <p id="text2-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-          </p>
-          <p id="text2-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+        </div>
+
+        <div class= "step">
+          <h2 id=text3-0 class ="maintext">04 Family Type</h2>
+          <p id="text3-a" class="maintext"> <span class="highlight">Juan</span>, a 23-year old in Isla de Mendez, El Salvador is part of an <span class="highlight">18-person</span> household wherein migration is a big part of their life. They have <span class="highlight">three family members who have migrated in the last five years</span>. Looking into these households, we begin to see that <span class="highlight">as household size</span> increases, the <span class="highlight">likelihood of migration</span> within families <span class="highlight">also increases</span>.   </p>
+          <div class="maintext">
+          <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://kjj94.github.io/bigdata/householdsizefunnel.html" height="400" width="100%"></iframe>
+          <p> Hover over the graph to explore the percentage of families with/without migrants across different household sizes! </p>
           </div>
 
-        <div class= "step">
-          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-          </p>
-          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-          </p>
-          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
+          <p id="text3-b" class="maintext"> <span class="highlight">Larger families have a higher likelihood of having migration</span>, ranking higher in terms of total percent within all family sizes from 5-18 people. In contrast, <span class="highlight">smaller families are much less likely to have any member who has externally migrated</span> in the last five years.
           </p>
         </div>
 
         <div class= "step">
-          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-          </p>
-          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-          </p>
-          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-          </p>
-        </div>
+          <h2 id=text3-0 class ="maintext"> 05 Education</h2>
+          <p id="text3-a" class="maintext"> <span class="highlight">Carmen</span>, A <span class="highlight">27-year old bi-parental mother</span> with six household members from Barrio Paz y Desarrollo, Guatemala, does not have anyone in her family who has migrated. However, in her survey, she <span class="highlight">emphasizes the importance of education, urging her children to prioritize education</span> and to return to study everyday.
+            </p>
+            <div class="maintext">
+            <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://kjj94.github.io/bigdata/educationfunnel.html" height="400" width="100%"></iframe>
+            <p> Hover over the graph to explore the percentage of families with/without migrants across different educational levels! </p>
+            </div>
+
+          <p id="text3-b" class="maintext"> Looking at the effects of migration, we can see that <span class="highlight">families with migrants tend to have a much higher maximum educational level</span> achieved- 39.6% have a general/technical baccalaureate within their family, versus 33.1 percent for families without external migration. Does external migration lead to higher education? While correlation/causation cannot be deduced, it is clear that migration has a stabilizing force for education.
+              </p>
+              </div>
 
         <div class= "step">
-          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-          </p>
-          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-          </p>
-          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-          </p>
-        </div>
+            <h2 id=text3-0 class ="maintext"> 06 Income</h2>
+                <p id="text3-a" class="maintext"> <span class="highlight">Ana</span>, a 44-year old woman with a 10-person household living in El Salvador, <span class="highlight">relies on remittances from a daughter in Canada. It represents 50 percent of her monthly income,</span> which is completed by 50 percent coming from her non-agricultural job. When it comes to families with migrants, migration can greatly improve income sufficiency. </p>
+                  <div class="maintext">
+                  <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://kjj94.github.io/bigdata/incomefunnel.html" height="400" width="100%"></iframe>
+                  <p> Hover over the graph to explore the percentage of families with/without migrants across different income sufficiency levels! </p>
+                  </div>
 
-        <div class= "step">
-          <h2 id=text3-0 class ="maintext">_01 Household Overview</h2>
-          <p id="text3-a" class="maintext"> We have interviews from almost 5,000 individuals representing distinct households across Honduras, El Salvador, and Guatemala. While migration travel is thought of as singular, the effects of migration ripple through the entire family.
-          </p>
-          <p id="text3-b" class="maintext"> In our data set, families are composed of many different types, ranging from bi-parental (1), single parent (2), extensive (3), or other (4). Here, you can see the type of household broken down by the size of our household is 4.46 people. We can see that there are an average of 4.46 people per household.
-          </p>
-          <p id="text3-c" class="maintext"> By dividing the breaking up of families across families that have migrated and those that have not, we can begin to unpack how migration affects across the families.
-        </div>
+                <p id="text3-b" class="maintext"> As shown in the graph, families with migrants are much more likely to have “enough” income than those without migrants (20.1% versus 13.9%.)
+                </p>
+
+                <p id="text3-b" class="maintext"> <span class="highlight">Remittances</span> are also a <span class="highlight">big part of the primary source of income</span>- <span class="highlight">one-fifth of families with migrants say their primary source of income comes from migrant remittances</span> from abroad. <span class="highlight">Even for households without any external migration, migrant remittances still make up five percent of primary source of income</span> for these families.Does external migration lead to greater income sufficiency? While correlation/causation cannot be deduced, remittances are a major source of income for many households, and can help move families from insufficient to enough income.    </p>
+
+                <div class="maintext">
+                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://kjj94.github.io/bigdata/primarysourceofincome.html" height="400" width="100%"></iframe>
+                <p> Hover over the graph to explore the primary source of income for different families! </p>
+                </div>
+
+
+          </div>
+
+          <div class= "step">
+            <h2 id=text3-0 class ="maintext"> 07 Conclusion</h2>
+            <p id="text3-a" class="maintext"> In conclusion, <span class="highlight">Pedro, Maria, Juan, Carmen, and Ana</span> are all individuals across the Northern Triangle that have been <span class="highlight">impacted by migration to varying degrees</span>. By looking at the effects of migration through households as a collective unit, we begin to understand the prevalence and importance of migration for education and income. When thinking about policy, <span class="highlight">it is important to consider the households well beyond the singular, individual migrant</span>. Migration affects entire households, and <span class="highlight">policy should be discussed in terms of the relation to entire households</span>.
+            </p>
+          </div>
+
       </div>
     </div>
 </div>
