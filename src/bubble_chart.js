@@ -571,7 +571,7 @@ function bubbleChart() {
   scroll.on('active', function(index){
       d3.selectAll('.step')
           .transition().duration(500)
-          .style('opacity', function (d, i) {return i === index ? 1 : 0.1;});
+          .style('opacity', function (d, i) {return i === index ? 1 : 1;});
 
       activeIndex = index
       let sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
