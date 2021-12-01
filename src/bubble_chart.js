@@ -9,8 +9,8 @@
 function bubbleChart() {
   // Constants for sizing
 
-  var width = 600;
-  var height = 800;
+  var width = 1000;
+  var height = 1000;
   var margin = {top: 30, bottom: 30, right: 30, left: 30};
 
 
@@ -222,7 +222,7 @@ function bubbleChart() {
     // with desired size.
     svg = d3.select('#vis')
       .append('svg')
-      .attr("viewBox", "0 0 1000 1000");
+      .attr("viewBox", [0, 0, width, height]);
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
