@@ -27,7 +27,7 @@ function scroller(){
         let startPos;
 
         sections.each(function(d, i) {
-            let top = this.getBoundingClientRect().top;
+            let top = this.getBoundingClientRect().bottom;
 
             if (i === 0 ){
                 startPos = top;
@@ -53,7 +53,7 @@ function scroller(){
     }
 
     scroll.container = function(value) {
-        if (arguments.legth === 0){
+        if (arguments.length === 0){
             return container
         }
         container = value
