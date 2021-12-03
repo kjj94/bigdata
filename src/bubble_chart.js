@@ -10,7 +10,7 @@ function bubbleChart() {
   // Constants for sizing
 
   var width = 800;
-  var height = 600;
+  var height = 580;
   var margin = {top: 30, bottom: 30, right: 30, left: 30};
 
   // tooltip for mouseover functionality
@@ -310,6 +310,7 @@ function bubbleChart() {
     hideTitles_no_mig_ext();
     hideTitles_tipo_familia();
     hideTitles_education();
+    hideTitles_income();
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
@@ -331,6 +332,7 @@ function bubbleChart() {
      hideTitles_no_mig_ext();
      hideTitles_tipo_familia();
      hideTitles_education();
+     hideTitles_income();
      showTitles_country();
 
      // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -344,6 +346,7 @@ function bubbleChart() {
     hideTitles_country();
     hideTitles_tipo_familia();
     hideTitles_education();
+    hideTitles_income();
     showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -356,6 +359,7 @@ function bubbleChart() {
   function splitBubbles_tipo_familia() {
     hideTitles_country();
     hideTitles_education();
+    hideTitles_income();
     showTitles_tipo_familia();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -430,7 +434,7 @@ function bubbleChart() {
      country.enter().append('text')
        .attr('class', 'label_country')
        .attr('x', function (d) { return country_TitleX[d]; })
-       .attr('y', margin.top)
+       .attr('y', margin.top*1.5)
        .attr('text-anchor', 'middle')
        .text(function (d) { return d; });
 
@@ -444,7 +448,7 @@ function bubbleChart() {
     no_mig_ext.enter().append('text')
       .attr('class', 'label_no_mig_ext')
       .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
-      .attr('y', margin.top)
+      .attr('y', margin.top*1.5)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -552,7 +556,8 @@ function bubbleChart() {
       splitBubbles_no_mig_ext,
       splitBubbles_tipo_familia,
       splitBubbles_education,
-      splitBubbles_income
+      splitBubbles_income,
+      groupBubbles,
   ]
 
   //All the scrolling function
@@ -567,7 +572,7 @@ function bubbleChart() {
 
   scroll.on('active', function(index){
       d3.selectAll('.step')
-          .transition().duration(1000)
+          .transition().duration(0)
           .style('opacity', function (d, i) {return i === index ? 1 : 0.5;});
 
 
