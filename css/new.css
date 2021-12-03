@@ -71,12 +71,15 @@ p {
 .image {
   border: 2px dotted #4392f1;
   background-color: rgba(255, 255, 255, 0.5);
-  margin-right: 25px;
+  margin-right: 25px !important;
   margin-top: 50px;
   margin-bottom: 0px;
   padding: 15px;
   position: relative;
   z-index: 1;
+  height: auto;
+  width: 95%;
+
 }
 
 
@@ -87,6 +90,7 @@ p {
 .footer {
   font-family: 'Raleway', sans-serif;
   text-align: center;
+  margin-top: 100px;
 }
 
 .highlight {
