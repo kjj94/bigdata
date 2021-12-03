@@ -19,7 +19,7 @@ a, a:visited, a:active {
 }
 
 #vis {
-  width: 40%;
+  width: 60%;
   clear: both;
   position: fixed;
 }
@@ -31,12 +31,15 @@ a, a:visited, a:active {
 }
 
 .label_no_mig_ext, .label_country, .label_tipo_familia, .label_education, .label_income {
-  font-size: 12px;
+  font-size: 8px;
   font-weight: 500;
   fill: #1a1b41;
   font-family: 'Raleway', sans-serif;
   cursor: default;
+  text-align: right;
 }
+
+
 
 .tooltip {
 	position: absolute;
