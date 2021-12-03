@@ -9,98 +9,98 @@
 function bubbleChart() {
   // Constants for sizing
 
-  var width = 1000;
-  var height = 1000;
+  var width = 800;
+  var height = 600;
   var margin = {top: 30, bottom: 30, right: 30, left: 30};
 
-
   // tooltip for mouseover functionality
-  var tooltip = floatingTooltip('gates_tooltip', 240);
+  var tooltip = floatingTooltip('sf_tooltip', 240);
 
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
 
+  var center = { x: width / 2, y: height / 2};
+
   var country_Centers = {
-    "SLV": { x: width / 4, y: height / 2},
-    "GT": { x: width / 2, y: height / 2},
-    "HND": { x: (width * 3) / 4, y: height / 2},
+    "SLV": { x: width / 4 + margin.left, y: height/2},
+    "GT": { x: width / 2 + margin.left, y: height/2},
+    "HND": { x: (width * 3) / 4 + margin.left, y: height/2},
   };
 
   var country_TitleX = {
-    "El Salvador":  width / 4,
-    "Guatemala": width / 2,
-    "Honduras": (width * 3) / 4,
+    "El Salvador":  width / 4 + margin.left,
+    "Guatemala": width / 2 + margin.left,
+    "Honduras": (width * 3) / 4 + margin.left,
   };
 
-  var center = { x: width / 2, y: height / 2 };
-
   var no_mig_ext_Centers = {
-    0: { x: width / 3, y: height / 2 },
-    1: { x: 2 * width / 3, y: height / 2 }
+    0: { x: width / 3 + margin.left, y: height / 2},
+    1: { x: width * 2 / 3 + margin.left, y: height / 2}
   };
 
   var no_mig_ext_TitleX = {
-    "Without Migrant": width / 3,
-    "With Migrant": 2 * width / 3
+    "Without Migrant": width / 3 + margin.left,
+    "With Migrant": 2 * width / 3 + margin.left,
   };
 
   var tipo_familia_Centers = {
-    1: { x: width / 2, y: (height-margin.top)*1/8},
-    2: { x: width / 2, y: (height-margin.top)*2/8},
-    3: { x: width / 2, y: (height-margin.top)*3/8},
-    5: { x: width / 2, y: (height-margin.top)*4/8},
-    8: { x: width / 2, y: (height-margin.top)*5/8},
-    9: { x: width / 2, y: (height-margin.top)*6/8},
-    10: { x: width / 2, y: (height-margin.top)*7/8}
+  1: {y: (height-margin.top*2)*1/7.5 + margin.top*2},
+  2: {y: (height-margin.top*2)*2/7.5 + margin.top*2},
+  3: {y: (height-margin.top*2)*3/7.5 + margin.top*2},
+  5: {y: (height-margin.top*2)*4/7.5 + margin.top*2},
+  8: {y: (height-margin.top*2)*5/7.5 + margin.top*2},
+  9: {y: (height-margin.top*2)*6/7.5 + margin.top*2},
+  10: {y: (height-margin.top*2)*7/7.5 + margin.top*2}
   };
 
   var tipo_familia_TitleY = {
-    "Biparent": (height-margin.top)*1/8,
-    "Single Parent: Mother": (height-margin.top)*2/8,
-    "Single Parent: Father": (height-margin.top)*3/8,
-    "Extensive": (height-margin.top)*4/8,
-    "Childless Union": (height-margin.top)*5/8,
-    "Only One Person": (height-margin.top)*6/8,
-    "Other": (height-margin.top)*7/8,
+    "Biparent": (height-margin.top*2)*1/7,
+    "Single Parent: Mother": (height-margin.top*2)*2/7,
+    "Single Parent: Father": (height-margin.top*2)*3/7,
+    "Extensive": (height-margin.top*2)*4/7,
+    "Childless Union": (height-margin.top*2)*5/7,
+    "Only One Person": (height-margin.top*2)*6/7,
+    "Other": (height-margin.top*2)*7/7,
   };
 
   var education_Centers = {
-    1: { x: width / 2, y: (height-margin.top*2)*1/9 },
-    2: { x: width / 2, y: (height-margin.top*2)*2/9 },
-    4: { x: width / 2, y: (height-margin.top*2)*3/9 },
-    5: { x: width / 2, y: (height-margin.top*2)*4/9 },
-    8: { x: width / 2, y: (height-margin.top*2)*5/9 },
-    9: { x: width / 2, y: (height-margin.top*2)*6/9 },
-    99: { x: width / 2, y: (height-margin.top*2)*7/9 }
+    1: {y: (height-margin.top*2)*1/7.5 + margin.top*2},
+    2: {y: (height-margin.top*2)*2/7.5 + margin.top*2},
+    4: {y: (height-margin.top*2)*3/7.5 + margin.top*2},
+    5: {y: (height-margin.top*2)*4/7.5 + margin.top*2},
+    8: {y: (height-margin.top*2)*5/7.5 + margin.top*2},
+    9: {y: (height-margin.top*2)*6/7.5 + margin.top*2},
+    99: {y: (height-margin.top*2)*7/7.5 + margin.top*2}
   };
 
   var education_TitleY = {
-    "Without Education": (height-margin.top*2)*1/9,
-    "Preschool-Primary": (height-margin.top*2)*2/9,
-    "Highschool": (height-margin.top*2)*3/9,
-    "Technical Training": (height-margin.top*2)*4/9,
-    "University Undegrad": (height-margin.top*2)*5/9,
-    "University Post Grad": (height-margin.top*2)*6/9,
-    "NS/NR": (height-margin.top*2)*7/9,
+    "Without Education": (height-margin.top*2)*1/7,
+    "Preschool-Primary": (height-margin.top*2)*2/7,
+    "Highschool": (height-margin.top*2)*3/7,
+    "Technical Training": (height-margin.top*2)*4/7,
+    "University Undegrad": (height-margin.top*2)*5/7,
+    "University Post Grad": (height-margin.top*2)*6/7,
+    "NS/NR": (height-margin.top*2)*7/7,
   };
 
   var income_Centers = {
-    1: { x: width / 2, y: (height-margin.top*2) / 8 + margin.top},
-    2: { x: width / 2, y: (height-margin.top*2) * 2 / 8 + margin.top},
-    3: { x: width / 2, y: (height-margin.top*2) * 3 / 8 + margin.top},
-    4: { x: width / 2, y: (height-margin.top*2) * 4 / 8 + margin.top},
-    5: { x: width / 2, y: (height-margin.top*2) * 5 / 8 + margin.top},
-    99: { x: width / 2, y: (height-margin.top*2) * 6 / 8 + margin.top},
+    1: {y: (height-margin.top*2.5) / 6.5 + margin.top*2},
+    2: {y: (height-margin.top*2.5) * 2 / 6.5 + margin.top*2},
+    3: {y: (height-margin.top*2.5) * 3 / 6.5 + margin.top*2},
+    4: {y: (height-margin.top*2.5) * 4 / 6.5 + margin.top*2},
+    5: {y: (height-margin.top*2.5) * 5 / 6.5 + margin.top*2},
+    99: { x: width / 2, y: (height-margin.top*2.5) * 6 / 6.5 + margin.top*2},
   };
 
   var income_TitleY = {
-    "Enough": (height-margin.top*2) / 8 + margin.top,
-    "Almost Enough": (height-margin.top*2) * 2 / 8 + margin.top,
-    "Sometimes Enough": (height-margin.top*2) * 3 / 8 + margin.top,
-    "Rarely Enough": (height-margin.top*2) * 4 / 8 + margin.top,
-    "Insufficient": (height-margin.top*2) * 5 / 8 + margin.top,
-    "NS/NR": (height-margin.top*2) * 6 / 8 + margin.top,
+    "Enough": (height-margin.top*2.5) / 6,
+    "Almost Enough": (height-margin.top*2.5) * 2 / 6,
+    "Sometimes Enough": (height-margin.top*2.5) * 3 / 6,
+    "Rarely Enough": (height-margin.top*2.5) * 4 / 6,
+    "Insufficient": (height-margin.top*2.5) * 5 / 6,
+    "NS/NR": (height-margin.top*2.5) * 6 / 6,
   };
+
 
   // @v4 strength to apply to the position forces
   var forceStrength = 0.03;
@@ -153,7 +153,6 @@ function bubbleChart() {
       .domain([ "SLV", "GT", "HND"])
       .range(['#BAFF29', '#16DB93', '#FF784F']);
 
-
   /*
    * This data manipulation function takes the raw data from
    * the CSV file and converts it into an array of node objects.
@@ -175,7 +174,7 @@ function bubbleChart() {
     // @v4: new flattened scale names.
     var radiusScale = d3.scalePow()
       .exponent(1.5)
-      .range([0, 10])
+      .range([0, 8])
       .domain([0, maxAmount]);
 
     // Use map() to convert raw data into node data.
@@ -281,9 +280,11 @@ function bubbleChart() {
     return country_Centers[d.country].x;
   }
 
+
   function nodeNo_mig_extPos(d) {
     return no_mig_ext_Centers[d.no_mig_ext].x;
   }
+
 
   function nodeTipo_familiaPos(d) {
     return tipo_familia_Centers[d.tipo_familia].y;
@@ -320,10 +321,10 @@ function bubbleChart() {
 
 
   /*
-   * Sets visualization in "split by year mode".
+   * Sets visualization in "split by mode".
    * The year labels are shown and the force layout
    * tick function is set to move nodes to the
-   * yearCenter of their data's year.
+   * xCenter.
    */
 
    function splitBubbles_country() {
@@ -422,8 +423,6 @@ function bubbleChart() {
 
 
    function showTitles_country() {
-     // Another way to do this would be to create
-     // the year texts once and then just hide them.
      var country_Data = d3.keys(country_TitleX);
      var country = svg.selectAll('.country')
        .data(country_Data);
@@ -431,15 +430,13 @@ function bubbleChart() {
      country.enter().append('text')
        .attr('class', 'label_country')
        .attr('x', function (d) { return country_TitleX[d]; })
-       .attr('y', height - margin.bottom)
+       .attr('y', margin.top)
        .attr('text-anchor', 'middle')
        .text(function (d) { return d; });
 
   }
 
   function showTitles_no_mig_ext() {
-    // Another way to do this would be to create
-    // the year texts once and then just hide them.
     var no_mig_extData = d3.keys(no_mig_ext_TitleX);
     var no_mig_ext = svg.selectAll('.no_mig_ext')
       .data(no_mig_extData);
@@ -447,7 +444,7 @@ function bubbleChart() {
     no_mig_ext.enter().append('text')
       .attr('class', 'label_no_mig_ext')
       .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
-      .attr('y', height - margin.bottom)
+      .attr('y', margin.top)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -458,9 +455,9 @@ function bubbleChart() {
       .data(tipo_familiaData);
     tipo_familia.enter().append('text')
       .attr('class', 'label_tipo_familia')
-      .attr('x', margin.left)
+      .attr('x', margin.left*2)
       .attr('y', function (d) { return tipo_familia_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'left')
+      .attr('text-anchor', 'right')
       .text(function (d) { return d; });
   }
 
@@ -470,9 +467,9 @@ function bubbleChart() {
       .data(educationData);
     education.enter().append('text')
       .attr('class', 'label_education')
-      .attr('x', margin.left)
+      .attr('x', margin.left* 2)
       .attr('y', function (d) { return education_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'left')
+      .attr('text-anchor', 'right')
       .text(function (d) { return d; });
   }
 
@@ -482,9 +479,9 @@ function bubbleChart() {
       .data(incomeData);
     income.enter().append('text')
       .attr('class', 'label_income')
-      .attr('x', margin.left)
+      .attr('x', margin.left*2)
       .attr('y', function (d) { return income_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'left')
+      .attr('text-anchor', 'right')
       .text(function (d) { return d; });
   }
 
@@ -570,7 +567,7 @@ function bubbleChart() {
 
   scroll.on('active', function(index){
       d3.selectAll('.step')
-          .transition().duration(500)
+          .transition().duration(100)
           .style('opacity', function (d, i) {return i === index ? 1 : 0.5;});
 
 
