@@ -109,3 +109,7 @@ p {
     background-size: 100% 40%;
     background-position: 0 90%;
 }
+
+.step{
+  height: 1500px;
+}
