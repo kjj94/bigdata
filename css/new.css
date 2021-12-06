@@ -96,9 +96,10 @@ p {
   font-family: 'Raleway', sans-serif;
   text-align: center;
   margin-top: 100px;
-  height: 175px;
+  height: 125px;
   background-color: #4392f1 !important;
-  opacity: 0.75;
+  opacity: 1;
+  border-top: 5px solid #baff29;
   padding-top: 50px;
   padding-right: 25px;
 }
