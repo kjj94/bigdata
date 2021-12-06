@@ -512,8 +512,6 @@ function bubbleChart() {
        .attr('x', function (d) { return country_TitleX[d]; })
        .attr('y', margin.top*2)
        .attr('text-anchor', 'middle')
-       .style("text-decoration", "underline")
-       .style("text-decoration-color", "#baff29")
        .text(function (d) { return d; });
 
   }
@@ -528,8 +526,6 @@ function bubbleChart() {
       .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
       .attr('y', margin.top*2)
       .attr('text-anchor', 'middle')
-      .style("text-decoration", "underline")
-      .style("text-decoration-color", "#baff29")
       .text(function (d) { return d; });
   }
 
