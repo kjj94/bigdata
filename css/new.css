@@ -114,3 +114,7 @@ p {
 .step{
   height: 1500px;
 }
+
+.step2{
+  height: 500px !important;
+}
