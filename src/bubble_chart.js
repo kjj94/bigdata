@@ -402,6 +402,7 @@ function bubbleChart() {
     hideTitles_income();
     hideTitles_remittances();
     showTitles_no_mig_ext();
+    showTitles_no_mig_ext_Q();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
@@ -420,8 +421,8 @@ function bubbleChart() {
     showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeTipo_familiaPos));
-    simulation.force('x', d3.forceX().strength(forceStrength*2).x(nodeNo_mig_extPos));
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeTipo_familiaPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -437,8 +438,8 @@ function bubbleChart() {
     showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
-    simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeEducationPos));
-    simulation.force('x', d3.forceX().strength(forceStrength*2).x(nodeNo_mig_extPos));
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeEducationPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
 
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
@@ -541,6 +542,9 @@ function bubbleChart() {
       .attr('y', margin.top*2)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
+  }
+
+  function showTitles_no_mig_ext_Q() {
       svg.append("text")
           .attr("x", (width + margin.left*3.8) / 2)
           .attr("y", height + margin.bottom)
