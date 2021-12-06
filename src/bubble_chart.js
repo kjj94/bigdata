@@ -416,7 +416,8 @@ function bubbleChart() {
     hideTitles_income();
     hideTitles_remittances();
     showTitles_tipo_familia();
-    hideTitles_no_mig_ext_Q()
+    hideTitles_no_mig_ext_Q();
+    showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeTipo_familiaPos));
@@ -432,7 +433,8 @@ function bubbleChart() {
     hideTitles_income();
     hideTitles_remittances();
     showTitles_education();
-    hideTitles_no_mig_ext_Q()
+    hideTitles_no_mig_ext_Q();
+    showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeEducationPos));
@@ -448,7 +450,8 @@ function bubbleChart() {
     hideTitles_education();
     hideTitles_remittances();
     showTitles_income();
-    hideTitles_no_mig_ext_Q()
+    hideTitles_no_mig_ext_Q();
+    showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength).y(nodeIncomePos));
@@ -464,7 +467,8 @@ function bubbleChart() {
     hideTitles_education();
     hideTitles_income();
     showTitles_remittances();
-    hideTitles_no_mig_ext_Q()
+    hideTitles_no_mig_ext_Q();
+    showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength).y(nodeRemittancesPos));
