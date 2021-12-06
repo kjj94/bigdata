@@ -606,7 +606,7 @@ function bubbleChart() {
         .attr('class', 'label_remittances_Q')
         .attr("text-anchor", "middle")
         .attr("font-size", "12px")
-        .text("In the last 12 months, has your household received financial aid from abroad?");
+        .text("In the last 12 months, has your household received remittances from abroad?");
   }
 
 
