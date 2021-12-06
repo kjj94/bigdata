@@ -47,7 +47,7 @@ a, a:visited, a:active {
 
 }
 
-.label_remittances_Q {
+.label_remittances_Q, .label_no_mig_ext_Q {
   fill: #1a1b41;
   font-family: 'Raleway', sans-serif;
   cursor: default;
