@@ -10,7 +10,8 @@ function bubbleChart() {
   // Constants for sizing
 
   var width = 800;
-  var height = 580;
+  var height = 600;
+  var h = 1500
   var margin = {top: 30, bottom: 30, right: 30, left: 30};
 
   // tooltip for mouseover functionality
@@ -19,38 +20,38 @@ function bubbleChart() {
   // Locations to move bubbles towards, depending
   // on which view mode is selected.
 
-  var center = { x: width / 2, y: height / 2};
+  var center = { x: (width + margin.left*3.8) / 2, y: height / 2 + margin.top*2.5};
 
   var country_Centers = {
-    "SLV": { x: width / 4 + margin.left, y: height/2},
-    "GT": { x: width / 2 + margin.left, y: height/2},
-    "HND": { x: (width * 3) / 4 + margin.left, y: height/2},
+    "SLV": { x: (width + margin.left*3.8) / 4, y: height/2},
+    "GT": { x: (width + margin.left*3.8) / 2, y: height/2},
+    "HND": { x: (width + margin.left*3.8) *3 / 4, y: height/2},
   };
 
   var country_TitleX = {
-    "El Salvador":  width / 4 + margin.left,
-    "Guatemala": width / 2 + margin.left,
-    "Honduras": (width * 3) / 4 + margin.left,
+    "El Salvador":  (width + margin.left*3.8) / 4,
+    "Guatemala": (width + margin.left*3.8) / 2,
+    "Honduras": (width + margin.left*3.8)* 3 / 4,
   };
 
   var no_mig_ext_Centers = {
-    0: { x: width / 3 + margin.left, y: height / 2},
-    1: { x: width * 2 / 3 + margin.left, y: height / 2}
+    0: { x: (width + margin.left*3.8) / 3, y: height / 2},
+    1: { x: (width + margin.left*3.8) * 2 / 3, y: height / 2}
   };
 
   var no_mig_ext_TitleX = {
-    "Without Migrant": width / 3 + margin.left,
-    "With Migrant": 2 * width / 3 + margin.left,
+    "Without Migrant": (width + margin.left*3.8) / 3,
+    "With Migrant": (width + margin.left*3.8) * 2 / 3,
   };
 
   var tipo_familia_Centers = {
-  1: {y: (height-margin.top*2)*1/7.5 + margin.top*2},
-  2: {y: (height-margin.top*2)*2/7.5 + margin.top*2},
-  3: {y: (height-margin.top*2)*3/7.5 + margin.top*2},
-  5: {y: (height-margin.top*2)*4/7.5 + margin.top*2},
-  8: {y: (height-margin.top*2)*5/7.5 + margin.top*2},
-  9: {y: (height-margin.top*2)*6/7.5 + margin.top*2},
-  10: {y: (height-margin.top*2)*7/7.5 + margin.top*2}
+  1: {y: (height-margin.top*2)*1/7.5 + margin.top*2.5},
+  2: {y: (height-margin.top*2)*2/7.5 + margin.top*2.5},
+  3: {y: (height-margin.top*2)*3/7.5 + margin.top*2.5},
+  5: {y: (height-margin.top*2)*4/7.5 + margin.top*2.5},
+  8: {y: (height-margin.top*2)*5/7.5 + margin.top*2.5},
+  9: {y: (height-margin.top*2)*6/7.5 + margin.top*2.5},
+  10: {y: (height-margin.top*2)*7/7.5 + margin.top*2.5}
   };
 
   var tipo_familia_TitleY = {
@@ -64,13 +65,13 @@ function bubbleChart() {
   };
 
   var education_Centers = {
-    1: {y: (height-margin.top*2)*1/7.5 + margin.top*2},
-    2: {y: (height-margin.top*2)*2/7.5 + margin.top*2},
-    4: {y: (height-margin.top*2)*3/7.5 + margin.top*2},
-    5: {y: (height-margin.top*2)*4/7.5 + margin.top*2},
-    8: {y: (height-margin.top*2)*5/7.5 + margin.top*2},
-    9: {y: (height-margin.top*2)*6/7.5 + margin.top*2},
-    99: {y: (height-margin.top*2)*7/7.5 + margin.top*2}
+    1: {y: (height-margin.top*2)*1/7.5 + margin.top*2.5},
+    2: {y: (height-margin.top*2)*2/7.5 + margin.top*2.5},
+    4: {y: (height-margin.top*2)*3/7.5 + margin.top*2.5},
+    5: {y: (height-margin.top*2)*4/7.5 + margin.top*2.5},
+    8: {y: (height-margin.top*2)*5/7.5 + margin.top*2.5},
+    9: {y: (height-margin.top*2)*6/7.5 + margin.top*2.5},
+    99: {y: (height-margin.top*2)*7/7.5 + margin.top*2.5}
   };
 
   var education_TitleY = {
@@ -84,12 +85,12 @@ function bubbleChart() {
   };
 
   var income_Centers = {
-    1: {y: (height-margin.top*2.5) / 6.5 + margin.top*2},
-    2: {y: (height-margin.top*2.5) * 2 / 6.5 + margin.top*2},
-    3: {y: (height-margin.top*2.5) * 3 / 6.5 + margin.top*2},
-    4: {y: (height-margin.top*2.5) * 4 / 6.5 + margin.top*2},
-    5: {y: (height-margin.top*2.5) * 5 / 6.5 + margin.top*2},
-    99: { x: width / 2, y: (height-margin.top*2.5) * 6 / 6.5 + margin.top*2},
+    1: {y: (height-margin.top*2.5) / 6.5 + margin.top*2.5},
+    2: {y: (height-margin.top*2.5) * 2 / 6.5 + margin.top*2.5},
+    3: {y: (height-margin.top*2.5) * 3 / 6.5 + margin.top*2.5},
+    4: {y: (height-margin.top*2.5) * 4 / 6.5 + margin.top*2.5},
+    5: {y: (height-margin.top*2.5) * 5 / 6.5 + margin.top*2.5},
+    99: { x: width / 2, y: (height-margin.top*2.5) * 6 / 6.5 + margin.top*2.5},
   };
 
   var income_TitleY = {
@@ -101,6 +102,36 @@ function bubbleChart() {
     "NS/NR": (height-margin.top*2.5) * 6 / 6,
   };
 
+  var income_Centers = {
+    1: {y: (height-margin.top*2.5) / 6.5 + margin.top*2.5},
+    2: {y: (height-margin.top*2.5) * 2 / 6.5 + margin.top*2.5},
+    3: {y: (height-margin.top*2.5) * 3 / 6.5 + margin.top*2.5},
+    4: {y: (height-margin.top*2.5) * 4 / 6.5 + margin.top*2.5},
+    5: {y: (height-margin.top*2.5) * 5 / 6.5 + margin.top*2.5},
+    99: { x: width / 2, y: (height-margin.top*2.5) * 6 / 6.5 + margin.top*2.5},
+  };
+
+  var income_TitleY = {
+    "Enough": (height-margin.top*2.5) / 6,
+    "Almost Enough": (height-margin.top*2.5) * 2 / 6,
+    "Sometimes Enough": (height-margin.top*2.5) * 3 / 6,
+    "Rarely Enough": (height-margin.top*2.5) * 4 / 6,
+    "Insufficient": (height-margin.top*2.5) * 5 / 6,
+    "NS/NR": (height-margin.top*2.5) * 6 / 6,
+  };
+
+  var remittances_Centers = {
+    0: {y: (height-margin.top*2.5) / 3.5 + margin.top*2.5},
+    1: {y: (height-margin.top*2.5) * 2 / 3.5 + margin.top*2.5},
+    99: {y: (height-margin.top*2.5) * 3 / 3.5 + margin.top*2.5},
+
+  };
+
+  var remittances_TitleY = {
+    "No": (height-margin.top*2.5) / 3,
+    "Yes": (height-margin.top*2.5) * 2 / 3,
+    "NS/NR": (height-margin.top*2.5) * 3 / 3,
+  };
 
   // @v4 strength to apply to the position forces
   var forceStrength = 0.03;
@@ -153,6 +184,8 @@ function bubbleChart() {
       .domain([ "SLV", "GT", "HND"])
       .range(['#BAFF29', '#16DB93', '#FF784F']);
 
+
+
   /*
    * This data manipulation function takes the raw data from
    * the CSV file and converts it into an array of node objects.
@@ -190,6 +223,7 @@ function bubbleChart() {
         education: d.escolaridad_max,
         country: d.country,
         income: d.income_sufficiency_6m,
+        remittances: d.remittances_yn,
         x: Math.random() * 800,
         y: Math.random() * 800
       };
@@ -221,7 +255,7 @@ function bubbleChart() {
     // with desired size.
     svg = d3.select('#vis')
       .append('svg')
-      .attr("viewBox", [0, 0, width, height]);
+      .attr("viewBox", [0, 0, width, h]);
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
@@ -240,6 +274,16 @@ function bubbleChart() {
       .attr('stroke-width', 0.25)
       .on('mouseover', showDetail)
       .on('mouseout', hideDetail);
+
+
+      svg.append('line')
+      .style("stroke", "#baff29")
+      .style("stroke-width", 3)
+      .style("stroke-dasharray", "2,2")
+      .attr("x1", margin.left*3.8)
+      .attr("y1", 0)
+      .attr("x2", margin.left*3.8)
+      .attr("y2", h);
 
     // @v4 Merge the original empty selection and the enter selection
     bubbles = bubbles.merge(bubblesE);
@@ -298,6 +342,10 @@ function bubbleChart() {
     return income_Centers[d.income].y;
   }
 
+  function nodeRemittancesPos(d) {
+    return remittances_Centers[d.remittances].y;
+  }
+
 
   /*
    * Sets visualization in "single group mode".
@@ -311,6 +359,7 @@ function bubbleChart() {
     hideTitles_tipo_familia();
     hideTitles_education();
     hideTitles_income();
+    hideTitles_remittances();
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
@@ -333,6 +382,7 @@ function bubbleChart() {
      hideTitles_tipo_familia();
      hideTitles_education();
      hideTitles_income();
+     hideTitles_remittances();
      showTitles_country();
 
      // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -347,6 +397,7 @@ function bubbleChart() {
     hideTitles_tipo_familia();
     hideTitles_education();
     hideTitles_income();
+    hideTitles_remittances();
     showTitles_no_mig_ext();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -360,6 +411,7 @@ function bubbleChart() {
     hideTitles_country();
     hideTitles_education();
     hideTitles_income();
+    hideTitles_remittances();
     showTitles_tipo_familia();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -374,6 +426,7 @@ function bubbleChart() {
     hideTitles_country();
     hideTitles_tipo_familia();
     hideTitles_income();
+    hideTitles_remittances();
     showTitles_education();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -388,6 +441,7 @@ function bubbleChart() {
     hideTitles_country();
     hideTitles_tipo_familia();
     hideTitles_education();
+    hideTitles_remittances();
     showTitles_income();
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
@@ -397,6 +451,22 @@ function bubbleChart() {
     // @v4 We can reset the alpha value and restart the simulation
     simulation.alpha(1).restart();
   }
+
+  function splitBubbles_remittances() {
+    hideTitles_country();
+    hideTitles_tipo_familia();
+    hideTitles_education();
+    hideTitles_income();
+    showTitles_remittances();
+
+    // @v4 Reset the 'x' force to draw the bubbles to their year centers
+    simulation.force('y', d3.forceY().strength(forceStrength).y(nodeRemittancesPos));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(nodeNo_mig_extPos));
+
+    // @v4 We can reset the alpha value and restart the simulation
+    simulation.alpha(1).restart();
+  }
+
 
   /*
    * Hides Year title displays.
@@ -421,6 +491,12 @@ function bubbleChart() {
     svg.selectAll('.label_income').remove();
   }
 
+  function hideTitles_remittances() {
+    svg.selectAll('.label_remittances').remove();
+    svg.selectAll('.label_remittances_Q').remove();
+  }
+
+
   /*
    * Shows Year title displays.
    */
@@ -434,7 +510,7 @@ function bubbleChart() {
      country.enter().append('text')
        .attr('class', 'label_country')
        .attr('x', function (d) { return country_TitleX[d]; })
-       .attr('y', margin.top*1.5)
+       .attr('y', margin.top*2)
        .attr('text-anchor', 'middle')
        .text(function (d) { return d; });
 
@@ -448,7 +524,7 @@ function bubbleChart() {
     no_mig_ext.enter().append('text')
       .attr('class', 'label_no_mig_ext')
       .attr('x', function (d) { return no_mig_ext_TitleX[d]; })
-      .attr('y', margin.top*1.5)
+      .attr('y', margin.top*2)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
   }
@@ -459,9 +535,9 @@ function bubbleChart() {
       .data(tipo_familiaData);
     tipo_familia.enter().append('text')
       .attr('class', 'label_tipo_familia')
-      .attr('x', margin.left*2)
-      .attr('y', function (d) { return tipo_familia_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'right')
+      .attr('x', margin.left*3.5)
+      .attr('y', function (d) { return tipo_familia_TitleY[d] + margin.top*2; })
+      .attr('text-anchor', 'end')
       .text(function (d) { return d; });
   }
 
@@ -471,9 +547,9 @@ function bubbleChart() {
       .data(educationData);
     education.enter().append('text')
       .attr('class', 'label_education')
-      .attr('x', margin.left* 2)
-      .attr('y', function (d) { return education_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'right')
+      .attr('x', margin.left*3.5)
+      .attr('y', function (d) { return education_TitleY[d] + margin.top*2; })
+      .attr('text-anchor', 'end')
       .text(function (d) { return d; });
   }
 
@@ -483,10 +559,29 @@ function bubbleChart() {
       .data(incomeData);
     income.enter().append('text')
       .attr('class', 'label_income')
-      .attr('x', margin.left*2)
-      .attr('y', function (d) { return income_TitleY[d] + .5 * height / 8; })
-      .attr('text-anchor', 'right')
+      .attr('x', margin.left*3.5)
+      .attr('y', function (d) { return income_TitleY[d] + margin.top*2; })
+      .attr('text-anchor', 'end')
       .text(function (d) { return d; });
+  }
+
+  function showTitles_remittances() {
+    var remittancesData = d3.keys(remittances_TitleY);
+    var remittances = svg.selectAll('.remittances')
+      .data(remittancesData);
+    remittances.enter().append('text')
+      .attr('class', 'label_remittances')
+      .attr('x', margin.left*3.5)
+      .attr('y', function (d) { return remittances_TitleY[d] + margin.top*1; })
+      .attr('text-anchor', 'end')
+      .text(function (d) { return d; });
+    svg.append("text")
+        .attr("x", (width + margin.left*3.8) / 2)
+        .attr("y", height + margin.bottom)
+        .attr('class', 'label_remittances_Q')
+        .attr("text-anchor", "middle")
+        .attr("font-size", "12px")
+        .text("In the last 12 months, has your household received financial aid from abroad?");
   }
 
 
@@ -557,6 +652,7 @@ function bubbleChart() {
       splitBubbles_tipo_familia,
       splitBubbles_education,
       splitBubbles_income,
+      splitBubbles_remittances,
       groupBubbles,
   ]
 

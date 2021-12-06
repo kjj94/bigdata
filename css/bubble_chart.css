@@ -19,7 +19,9 @@ a, a:visited, a:active {
 }
 
 #vis {
-  width: 60%;
+  height: 100%;
+  width: 55%;
+
   clear: both;
   position: fixed;
 }
@@ -30,13 +32,24 @@ a, a:visited, a:active {
   position: fixed;
 }
 
-.label_no_mig_ext, .label_country, .label_tipo_familia, .label_education, .label_income {
+.label_no_mig_ext, .label_country, .label_tipo_familia, .label_education, .label_income, .label_remittances {
   font-size: 8px;
-  font-weight: 500;
   fill: #1a1b41;
   font-family: 'Raleway', sans-serif;
   cursor: default;
-  text-align: right;
+}
+
+.label_no_mig_ext, .label_country {
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: #baff29;
+}
+
+.label_remittances_Q {
+  fill: #1a1b41;
+  font-family: 'Raleway', sans-serif;
+  cursor: default;
 }
 
 
@@ -47,7 +60,7 @@ a, a:visited, a:active {
 	left: 100px;
   -moz-border-radius:5px;
 	border-radius: 5px;
-  border: 2px solid #4392f1;
+  border: 2px solid #baff29;
   background: #fff;
 	opacity: .9;
   color: #1a1b41;
