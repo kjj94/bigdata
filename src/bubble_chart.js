@@ -360,6 +360,7 @@ function bubbleChart() {
     hideTitles_education();
     hideTitles_income();
     hideTitles_remittances();
+    hideTitles_no_mig_ext_Q();
 
     // @v4 Reset the 'x' force to draw the bubbles to the center.
     simulation.force('x', d3.forceX().strength(forceStrength).x(center.x));
@@ -384,6 +385,8 @@ function bubbleChart() {
      hideTitles_income();
      hideTitles_remittances();
      showTitles_country();
+     hideTitles_no_mig_ext_Q();
+
 
      // @v4 Reset the 'x' force to draw the bubbles to their year centers
      simulation.force('x', d3.forceX().strength(forceStrength).x(countryPos));
@@ -413,6 +416,7 @@ function bubbleChart() {
     hideTitles_income();
     hideTitles_remittances();
     showTitles_tipo_familia();
+    hideTitles_no_mig_ext_Q()
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeTipo_familiaPos));
@@ -428,6 +432,7 @@ function bubbleChart() {
     hideTitles_income();
     hideTitles_remittances();
     showTitles_education();
+    hideTitles_no_mig_ext_Q()
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength*2).y(nodeEducationPos));
@@ -443,6 +448,7 @@ function bubbleChart() {
     hideTitles_education();
     hideTitles_remittances();
     showTitles_income();
+    hideTitles_no_mig_ext_Q()
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength).y(nodeIncomePos));
@@ -458,6 +464,7 @@ function bubbleChart() {
     hideTitles_education();
     hideTitles_income();
     showTitles_remittances();
+    hideTitles_no_mig_ext_Q()
 
     // @v4 Reset the 'x' force to draw the bubbles to their year centers
     simulation.force('y', d3.forceY().strength(forceStrength).y(nodeRemittancesPos));
@@ -473,6 +480,9 @@ function bubbleChart() {
    */
   function hideTitles_no_mig_ext() {
     svg.selectAll('.label_no_mig_ext').remove();
+  }
+  function hideTitles_no_mig_ext_Q() {
+    svg.selectAll('.label_no_mig_ext_Q').remove();
   }
 
   function hideTitles_country() {
@@ -527,6 +537,13 @@ function bubbleChart() {
       .attr('y', margin.top*2)
       .attr('text-anchor', 'middle')
       .text(function (d) { return d; });
+      svg.append("text")
+          .attr("x", (width + margin.left*3.8) / 2)
+          .attr("y", height + margin.bottom)
+          .attr('class', 'label_no_mig_ext_Q')
+          .attr("text-anchor", "middle")
+          .attr("font-size", "10px")
+          .text("Has anyone in the household or who has been part of the household migrate or try to migrate abroad in the last 5 years?");
   }
 
   function showTitles_tipo_familia() {
@@ -590,6 +607,10 @@ function bubbleChart() {
    * details of a bubble in the tooltip.
    */
   function showDetail(d) {
+    var tipo_familiaData = d3.keys(tipo_familia_TitleY);
+    var tipo_familia = svg.selectAll('.tipo_familia')
+      .data(tipo_familiaData);
+
     // change outline to indicate hover state.
     d3.select(this).attr('stroke', 'black');
 
@@ -597,11 +618,8 @@ function bubbleChart() {
                   d.country +
                   '</span><br/>' +
                   '<span class="name">Household size: </span><span class="value">' +
-                  addCommas(d.value) +
-                  '</span><br/>' +
-                  '<span class="name">Household type: </span><span class="value">' +
-                  d.tipo_familia +
-                  '</span>';
+                  addCommas(d.value)
+                  ;
 
     tooltip.showTooltip(content, d3.event);
   }
